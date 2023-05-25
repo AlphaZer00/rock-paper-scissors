@@ -11,3 +11,16 @@
 //      - Function to return a message that explains who won and and option to play again
 //      - Game function that loops comparison function five times and displays score
 
+function getComputerSelection() {
+    let computerSelection;
+    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    if (randomNumber === 1) {
+        computerSelection = "Rock";
+    } else if (randomNumber === 2) {
+        computerSelection = "Paper";
+    } else {
+        computerSelection = "Scissors";
+    }
+    return computerSelection;
+}
+console.log(getComputerSelection());
