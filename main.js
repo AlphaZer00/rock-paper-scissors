@@ -26,9 +26,9 @@ function getComputerSelection() {
     }
     return computerSelection;
 }
-//console.log(getComputerSelection());
 
-function round(playerSelection, computerSelection) {
+
+function playRound(playerSelection, computerSelection) {
     playerSelection = prompt("Rock, Paper, or Scissors?",);
     response = playerSelection.toLowerCase();
     computerSelection = getComputerSelection();
@@ -74,12 +74,12 @@ function round(playerSelection, computerSelection) {
 }
 
 
-function game() {
+function playGame() {
     let userScore = 0;
     let computerScore = 0;
     
     for (let i = 0; i < 5; i++) {
-    round();
+    playRound();
     if (outcome.slice(-5) === "lose!") {
         computerScore = ++computerScore;
     } else if (outcome.slice(-4) === "win!") {
