@@ -32,17 +32,16 @@ function getComputerSelection() {
 
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = prompt("Rock, Paper, or Scissors?",);
-    response = playerSelection.toLowerCase();
+    response = playerSelection;
     computerSelection = getComputerSelection();
 
     console.log(computerSelection);
 
-    if ((response !== "rock" ) && (response !== "paper") && (response !== "scissors" )) {
-        alert("That is not a valid input! Please check your spelling.");
-        playerSelection = prompt("Rock, Paper, or Scissors?",);
-        response = playerSelection.toLowerCase();
-    }
+    // if ((response !== "rock" ) || (response !== "paper") || (response !== "scissors" )) {
+    //     alert("That is not a valid input! Please check your spelling.");
+    //     playerSelection = prompt("Rock, Paper, or Scissors?",);
+    //     response = playerSelection.toLowerCase();
+    // }
 
     console.log(response);
 
@@ -109,3 +108,13 @@ Computer Score: ${computerScore}`;
         console.log(message);
     }
 }
+
+
+const rock = document.querySelector(".rockButton");
+rock.addEventListener('click', () => playRound("rock"));
+
+const paper = document.querySelector(".paperButton");
+paper.addEventListener('click', () => playRound("paper"));
+
+const scissors = document.querySelector(".scissorsButton");
+scissors.addEventListener('click', () => playRound("scissors"));
