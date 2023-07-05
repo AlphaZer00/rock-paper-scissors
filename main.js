@@ -14,9 +14,22 @@
 
 let computerSelection;
 let outcome;
+let userScore = 0;
+let computerScore = 0;
+let scoreCounter =
+        `Your Score: ${userScore}
+        Computer Score: ${computerScore}`;
+const scoreDisplay = document.querySelector(".scoreDisplay");
+scoreDisplay.textContent = scoreCounter;
+const dialogue = document.querySelector(".dialogue");
+dialogue.textContent = "Click one of the buttons to make your selection and start the game, first to win 5 rounds wins!";
+
+const userPicture = document.querySelector(".userPicture");
+const computerPicture = document.querySelector(".computerPicture");
+
+    
 
 function getComputerSelection() {
-    
     let randomNumber = Math.floor(Math.random() * 3) + 1;
 
     if (randomNumber === 1) {
@@ -30,11 +43,27 @@ function getComputerSelection() {
     return computerSelection;
 }
 
+function changeImage() {
+    if (response = "rock") {
+        userPicture.src = "images/rock-vector.jpg";
+    } else if (response = "paper") {
+        userPicture.src = "images/paper-vector.jpg";
+    } else if (response = "scissors") {
+        userPicture.src = "images/scissors-vector.jpg";
+    }
 
-function playRound(playerSelection, computerSelection) {
+    if (computerSelection = "rock") {
+        computerPicture.src = "images/rock-vector.jpg";
+    } else if (computerSelection = "paper") {
+        computerPicture.src = "images/paper-vector.jpg";
+    } else if (computerSelection = "scissors") {
+        computerPicture.src = "images/scissors-vector.jpg";
+    }
+}
+
+function playRound(playerSelection) {
     response = playerSelection;
     computerSelection = getComputerSelection();
-
     console.log(computerSelection);
 
     // if ((response !== "rock" ) || (response !== "paper") || (response !== "scissors" )) {
@@ -47,67 +76,78 @@ function playRound(playerSelection, computerSelection) {
 
     if (response === computerSelection) {
         outcome = "It's a tie!";
+        updateScore();
         return outcome;
     }
 
     if (response === "scissors" && computerSelection === "paper") {
         outcome = "Scissors beats paper, you win!";
+        updateScore();
         return outcome;
     } else if (playerSelection === "scissors" && computerSelection === "rock") {
         outcome = "Rock beats scissors, you lose!";
+        updateScore();
         return outcome;
     }
 
     if (response === "rock" && computerSelection === "scissors") {
         outcome = "Rock beats scissors, you win!";
+        updateScore();
         return outcome;
     } else if (response === "rock" && computerSelection === "paper") {
         outcome = "Paper beats rock, you lose!";
+        updateScore();
         return outcome;
     }
 
     if (response === "paper" && computerSelection === "rock") {
         outcome = "Paper beats rock, you win!"
+        updateScore();
         return outcome;
     } else if (response === "paper" && computerSelection === "scissors") {
         outcome = "Scissors beats paper, you lose!";
+        updateScore();
         return outcome;
     }
-}
+
+    function updateScore() {
+        dialogue.textContent = outcome;
+        if (userScore < 5 && computerScore < 5) {
+             if (outcome.slice(-5) === "lose!") {
+                computerScore = ++computerScore;
+            } else if (outcome.slice(-4) === "win!") {
+                userScore = ++userScore;
+            }
+        } 
+        
+        console.log(userScore);
+
+        scoreCounter =
+        `Your Score: ${userScore}
+        Computer Score: ${computerScore}`;
+        scoreDisplay.textContent = scoreCounter;    
 
 
-function playGame() {
-    let userScore = 0;
-    let computerScore = 0;
-    
-    for (let i = 0; i < 5; i++) {
-        playRound();
-        if (outcome.slice(-5) === "lose!") {
-            computerScore = ++computerScore;
-        } else if (outcome.slice(-4) === "win!") {
-            userScore = ++userScore;
+        if (userScore === 5) {
+            message = "Game over, You won!";
+            dialogue.textContent = message;
+
+        } else if (computerScore === 5) {
+            message = "Game over, You lost!";
+            dialogue.textContent = message;
+        // } else if (userScore > computerScore) {
+        //     dialogue.textContent = "You're in the lead!";
+        // } else if (userScore < computerScore) {
+        //     dialogue.textContent = "You're behind!";
         }
-
-    console.log(userScore);
-
-    let scoreCounter =
-    `Your Score: ${userScore}
-Computer Score: ${computerScore}`;
-
-    console.log(scoreCounter);
     }
 
-    if (userScore > computerScore) {
-        message = "Game over, You won!";
-        console.log(message);
-    } else if (userScore < computerScore) {
-        message = "Game over, You lost!";
-        console.log(message);
-    } else {
-        message = "Game over! It's a tie!"
-        console.log(message);
+    function resetState() {
+        f
     }
 }
+
+
 
 
 const rock = document.querySelector(".rockButton");
@@ -117,4 +157,4 @@ const paper = document.querySelector(".paperButton");
 paper.addEventListener('click', () => playRound("paper"));
 
 const scissors = document.querySelector(".scissorsButton");
-scissors.addEventListener('click', () => playRound("scissors"));
+scissors.addEventListener('click', () => playRound("scissors"))
