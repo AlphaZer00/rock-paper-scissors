@@ -11,6 +11,7 @@
       - Function to return a message that explains who won and and option to play again
       - Game function that loops comparison function five times and displays score
 */
+//document.addEventListener('DOMContentLoaded', function () {
 
 let computerSelection;
 let outcome;
@@ -22,7 +23,7 @@ let scoreCounter =
 const scoreDisplay = document.querySelector(".scoreDisplay");
 scoreDisplay.textContent = scoreCounter;
 const dialogue = document.querySelector(".dialogue");
-dialogue.textContent = "Click one of the buttons to make your selection and start the game, first to win 5 rounds wins!";
+dialogue.textContent = "Click one of the buttons to make your selection and start the game, first to win 5 points wins!";
 
 const userPicture = document.querySelector(".userPicture");
 const computerPicture = document.querySelector(".computerPicture");
@@ -43,35 +44,34 @@ function getComputerSelection() {
     return computerSelection;
 }
 
-function changeImage() {
-    if (response = "rock") {
-        userPicture.src = "images/rock-vector.jpg";
-    } else if (response = "paper") {
-        userPicture.src = "images/paper-vector.jpg";
-    } else if (response = "scissors") {
-        userPicture.src = "images/scissors-vector.jpg";
-    }
+function changeImage(response, computerSelection) {
+    const userPicture = document.querySelector(".pic1");
+    const computerPicture = document.querySelector(".pic2");
 
-    if (computerSelection = "rock") {
+    if (response == "rock") {
+        userPicture.setAttribute("src", "images/rock-vector.jpg");
+    } else if (response == "paper") {
+        userPicture.setAttribute("src", "images/paper-vector.jpg");
+    } else if (response == "scissors") {
+        userPicture.setAttribute("src", "images/scissors-vector.jpg");
+    }
+    console.log(userPicture.src);
+
+    if (computerSelection == "rock") {
         computerPicture.src = "images/rock-vector.jpg";
-    } else if (computerSelection = "paper") {
+    } else if (computerSelection == "paper") {
         computerPicture.src = "images/paper-vector.jpg";
-    } else if (computerSelection = "scissors") {
+    } else if (computerSelection == "scissors") {
         computerPicture.src = "images/scissors-vector.jpg";
     }
 }
 
-function playRound(playerSelection) {
+function playRound(playerSelection, computerSelection) {
     response = playerSelection;
     computerSelection = getComputerSelection();
-    console.log(computerSelection);
-
-    // if ((response !== "rock" ) || (response !== "paper") || (response !== "scissors" )) {
-    //     alert("That is not a valid input! Please check your spelling.");
-    //     playerSelection = prompt("Rock, Paper, or Scissors?",);
-    //     response = playerSelection.toLowerCase();
-    // }
-
+    
+    changeImage(playerSelection, computerSelection);
+   
     console.log(response);
 
     if (response === computerSelection) {
@@ -119,7 +119,7 @@ function playRound(playerSelection) {
                 userScore = ++userScore;
             }
         } 
-        
+
         console.log(userScore);
 
         scoreCounter =
@@ -143,7 +143,20 @@ function playRound(playerSelection) {
     }
 
     function resetState() {
-        f
+        if (userScore === 5 || computerScore === 5) {
+            let computerSelection;
+            let outcome;
+            let userScore = 0;
+            let computerScore = 0;
+            let scoreCounter =
+        `Your Score: ${userScore}
+        Computer Score: ${computerScore}`;
+            const scoreDisplay = document.querySelector(".scoreDisplay");
+            scoreDisplay.textContent = scoreCounter;
+            const dialogue = document.querySelector(".dialogue");
+            dialogue.textContent = "Click one of the buttons to make your selection and start the game, first to win 5 points wins!";
+
+        }
     }
 }
 
@@ -157,4 +170,6 @@ const paper = document.querySelector(".paperButton");
 paper.addEventListener('click', () => playRound("paper"));
 
 const scissors = document.querySelector(".scissorsButton");
-scissors.addEventListener('click', () => playRound("scissors"))
+scissors.addEventListener('click', () => playRound("scissors"));
+
+//});
