@@ -1,17 +1,7 @@
 /*                               ----Rock, Paper, Scissors----
   This program is a simple rock, paper, scissors game in which the user will make a selection
   and that will be compared to a random selection by the computer for five rounds.
-
-  Planning
-  Functions needed:
-      - Computer's random choice
-      - A way for the user to make a selection
-      - Comparison between user's and computer's selection 
-      - Function to keep score
-      - Function to return a message that explains who won and and option to play again
-      - Game function that loops comparison function five times and displays score
 */
-//document.addEventListener('DOMContentLoaded', function () {
 
 let computerSelection;
 let outcome;
@@ -55,7 +45,6 @@ function changeImage(response, computerSelection) {
     } else if (response == "scissors") {
         userPicture.setAttribute("src", "images/scissors-vector.jpg");
     }
-    console.log(userPicture.src);
 
     if (computerSelection == "rock") {
         computerPicture.src = "images/rock-vector.jpg";
@@ -71,8 +60,12 @@ function playRound(playerSelection, computerSelection) {
     computerSelection = getComputerSelection();
     
     changeImage(playerSelection, computerSelection);
-   
-    console.log(response);
+
+    console.log(userScore);
+    console.log(computerScore);
+    if ((userScore === 5)||(computerScore === 5)) {
+        resetState();
+    }
 
     if (response === computerSelection) {
         outcome = "It's a tie!";
@@ -110,6 +103,21 @@ function playRound(playerSelection, computerSelection) {
         return outcome;
     }
 
+
+
+    function resetState() {
+        userScore = 0;
+        computerScore = 0;
+        scoreCounter =
+    `Your Score: ${userScore}
+    Computer Score: ${computerScore}`;
+    const scoreDisplay = document.querySelector(".scoreDisplay");
+    scoreDisplay.textContent = scoreCounter;
+    const dialogue = document.querySelector(".dialogue");
+    dialogue.textContent = "Click one of the buttons to make your selection and start the game, first to win 5 points wins!";
+    }
+}
+
     function updateScore() {
         dialogue.textContent = outcome;
         if (userScore < 5 && computerScore < 5) {
@@ -127,7 +135,6 @@ function playRound(playerSelection, computerSelection) {
         Computer Score: ${computerScore}`;
         scoreDisplay.textContent = scoreCounter;    
 
-
         if (userScore === 5) {
             message = "Game over, You won!";
             dialogue.textContent = message;
@@ -135,32 +142,8 @@ function playRound(playerSelection, computerSelection) {
         } else if (computerScore === 5) {
             message = "Game over, You lost!";
             dialogue.textContent = message;
-        // } else if (userScore > computerScore) {
-        //     dialogue.textContent = "You're in the lead!";
-        // } else if (userScore < computerScore) {
-        //     dialogue.textContent = "You're behind!";
         }
     }
-
-    function resetState() {
-        if (userScore === 5 || computerScore === 5) {
-            let computerSelection;
-            let outcome;
-            let userScore = 0;
-            let computerScore = 0;
-            let scoreCounter =
-        `Your Score: ${userScore}
-        Computer Score: ${computerScore}`;
-            const scoreDisplay = document.querySelector(".scoreDisplay");
-            scoreDisplay.textContent = scoreCounter;
-            const dialogue = document.querySelector(".dialogue");
-            dialogue.textContent = "Click one of the buttons to make your selection and start the game, first to win 5 points wins!";
-
-        }
-    }
-}
-
-
 
 
 const rock = document.querySelector(".rockButton");
@@ -171,5 +154,3 @@ paper.addEventListener('click', () => playRound("paper"));
 
 const scissors = document.querySelector(".scissorsButton");
 scissors.addEventListener('click', () => playRound("scissors"));
-
-//});
