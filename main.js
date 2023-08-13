@@ -101,11 +101,10 @@ function playRound(playerSelection, computerSelection) {
         outcome = "Scissors beats paper, you lose!";
         updateScore();
         return outcome;
-    }
+    }   
+}
 
-
-
-    function resetState() {
+function resetState() {
         userScore = 0;
         computerScore = 0;
         scoreCounter =
@@ -115,35 +114,34 @@ function playRound(playerSelection, computerSelection) {
     scoreDisplay.textContent = scoreCounter;
     const dialogue = document.querySelector(".dialogue");
     dialogue.textContent = "Click one of the buttons to make your selection and start the game, first to win 5 points wins!";
-    }
 }
 
-    function updateScore() {
-        dialogue.textContent = outcome;
-        if (userScore < 5 && computerScore < 5) {
-             if (outcome.slice(-5) === "lose!") {
-                computerScore = ++computerScore;
-            } else if (outcome.slice(-4) === "win!") {
-                userScore = ++userScore;
-            }
-        } 
-
-        console.log(userScore);
-
-        scoreCounter =
-        `Your Score: ${userScore}
-        Computer Score: ${computerScore}`;
-        scoreDisplay.textContent = scoreCounter;    
-
-        if (userScore === 5) {
-            message = "Game over, You won!";
-            dialogue.textContent = message;
-
-        } else if (computerScore === 5) {
-            message = "Game over, You lost!";
-            dialogue.textContent = message;
+function updateScore() {
+    dialogue.textContent = outcome;
+    if (userScore < 5 && computerScore < 5) {
+            if (outcome.slice(-5) === "lose!") {
+            computerScore = ++computerScore;
+        } else if (outcome.slice(-4) === "win!") {
+            userScore = ++userScore;
         }
+    } 
+
+    console.log(userScore);
+
+    scoreCounter =
+    `Your Score: ${userScore}
+    Computer Score: ${computerScore}`;
+    scoreDisplay.textContent = scoreCounter;    
+
+    if (userScore === 5) {
+        message = "Game over, You won!";
+        dialogue.textContent = message;
+
+    } else if (computerScore === 5) {
+        message = "Game over, You lost!";
+        dialogue.textContent = message;
     }
+}
 
 
 const rock = document.querySelector(".rockButton");
